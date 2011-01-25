@@ -56,7 +56,7 @@ module DataMapper
             end
 
             def #{singular}_list=(string)
-              @#{singular}_list = string.to_s.split(',').map { |name| name.gsub(/[^\\w\\s_-]/i, '').strip }.uniq.sort
+              @#{singular}_list = string.to_s.split(',').map { |name| name.gsub(/[^\\w\\s\\/_-]/i, '').strip }.uniq
             end
 
             alias_method :#{singular}_collection=, :#{singular}_list=
@@ -80,8 +80,8 @@ module DataMapper
             # Like tag_collection= except it only add's tags
             #
             def add_#{singular}(string)
-              tag_names = string.to_s.split(',').map { |name| name.gsub(/[^\\w\\s_-]/i, '').strip }
-              @#{singular}_list = tag_names.concat(#{singular}_list).uniq.sort
+              tag_names = string.to_s.split(',').map { |name| name.gsub(/[^\\w\\s\\/_-]/i, '').strip }
+              @#{singular}_list = tag_names.concat(#{singular}_list).uniq
             end
           RUBY
         end
