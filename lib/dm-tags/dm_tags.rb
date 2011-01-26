@@ -47,7 +47,7 @@ module DataMapper
             property :frozen_#{singular}_list, Text
 
             has n, :#{singular}_taggings, Tagging, :child_key => [ :taggable_id ], :taggable_type => self, :tag_context => '#{association}'
-            has n, :#{association},       Tag,     :through => :#{singular}_taggings, :via => :tag, :order => [ :name ]
+            has n, :#{association},       Tag,     :through => :#{singular}_taggings, :via => :tag, :order => [ :id ]
 
             before :save, :update_#{association}
 
